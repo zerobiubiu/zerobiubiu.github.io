@@ -1,0 +1,108 @@
+<!doctype html><html lang=zh-CN><head><meta content="public, max-age=31536000" http-equiv=Cache-Control><meta content=public http-equiv=Pragma><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="text/html; charset=utf-8" http-equiv=content-type><meta content="width=device-width,initial-scale=1.0,maximum-scale=1,viewport-fit=cover" name=viewport><title>Zerobiubiu</title><link href=https://example.com/print.css media=print rel=stylesheet><link href=https://example.com/poole.css rel=stylesheet><link href=https://example.com/hyde.css rel=stylesheet><link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" rel=stylesheet><link href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css rel=stylesheet><link sizes="16x16 32x32 64x64" href=https://example.com/img/logo.png rel=icon><body><div class=sidebar><div class="container sidebar-sticky"><div class=sidebar-about><a href=https://example.com> <img alt=logo class=logo src=https://example.com/img/logo.png> <h1>Zerobiubiu</h1> </a><p class=lead>我的博客</div><ul class=sidebar-nav><li class=sidebar-nav-item><a href=https://github.com/zerobiubiu target=_blank><i class="bi bi-github">Github</i></a><li class=sidebar-nav-item><a href=/about target=_blank><i class="bi bi-file-person">About</i></a></ul></div></div><div class="content container"><div class=post><h1 class=post-title>Typora 画图</h1><span class=post-date>2022-05-10 18:43:56</span><blockquote><p>说是画图，但并不像其他专业的绘图软件那样，通过拖拖拽拽一些元素，画出流程图、时序图等。 Typora 的制图功能是由 Mermaid 强力驱动，如果你使用过 PlantUML，那么 Mermaid 也非常容易上手。 最大的用途是能轻松的在内部生成一个轻量的图，而不需要再去其他软件导出图片。</blockquote><span id=continue-reading></span><h2 id=shi-yong-fang-fa>使用方法</h2><p>Typora内置了对Mermaid的支持，Markdown的语法因不同的解析器或编辑器而异，Typora使用的是GitHub Flavored Markdown<sup class=footnote-reference id=fr-1-1><a href=#fn-1>[1]</a></sup>。 Mermaid 支持绘制非常多种类的图，常见的有时序图、流程图、类图、甘特图等等。 首先在 Typora 中，输入```mermaid 然后敲击回车，即可初始化一张空白图。<h3 id=liu-cheng-tu>流程图</h3><p>语法解释：<code>graph</code>关键字就是声明一张流程图，<code>TD</code>表示的是方向，这里的含义是 Top-Down 由上至下。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>graph TD
+</span><span>    A[Christmas] -->|Get money| B(Go shopping)
+</span><span>    B --> C{Let me think}
+</span><span>    C -->|One| D[Laptop]
+</span><span>    C -->|Two| E[iPhone]
+</span><span>    C -->|Three| F[fa:fa-car Car]
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652196724976.jpg><p><code>LR</code>在这里的含义是 Left-Right 由左至右。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>graph LR
+</span><span>    A[Christmas] -->|Get money| B(Go shopping)
+</span><span>    B --> C{Let me think}
+</span><span>    C -->|One| D[Laptop]
+</span><span>    C -->|Two| E[iPhone]
+</span><span>    C -->|Three| F[fa:fa-car Car]
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652196929955.jpg><h3>时序图</h3><p>语法解释：<code>->></code>代表实线箭头，<code>-->></code>则代表虚线。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>sequenceDiagram
+</span><span>    Alice->>+John: Hello John, how are you?
+</span><span>    Alice->>+John: John, can you hear me?
+</span><span>    John-->>-Alice: Hi Alice, I can hear you!
+</span><span>    John-->>-Alice: I feel great!
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197237445.jpg><h3 id=-1>状态图</h3><p>语法解释：[*] 表示开始或者结束，如果在箭头右边则表示结束。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>stateDiagram-v2
+</span><span>    [*] --> Still
+</span><span>    Still --> [*]
+</span><span>    Still --> Moving
+</span><span>    Moving --> Still
+</span><span>    Moving --> Crash
+</span><span>    Crash --> [*]
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197307364.jpg><h3 id=-2>类图</h3><p>语法解释：<|– 表示继承，+ 表示 public，- 表示 private，学过 Java 的应该都知道。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>classDiagram
+</span><span>    Animal <|-- Duck
+</span><span>    Animal <|-- Fish
+</span><span>    Animal <|-- Zebra
+</span><span>    Animal : +int age
+</span><span>    Animal : +String gender
+</span><span>    Animal: +isMammal()
+</span><span>    Animal: +mate()
+</span><span>    class Duck{
+</span><span>      +String beakColor
+</span><span>      +swim()
+</span><span>      +quack()
+</span><span>    }
+</span><span>    class Fish{
+</span><span>      -int sizeInFeet
+</span><span>      -canEat()
+</span><span>    }
+</span><span>    class Zebra{
+</span><span>      +bool is_wild
+</span><span>      +run()
+</span><span>    }
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197374799.jpg><h3 id=-3>甘特图</h3><p>甘特图一般用来表示项目的计划排期，目前在工作中经常会用到。 语法也非常简单，从上到下依次是图片标题、日期格式、项目、项目细分的任务。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>gantt
+</span><span>    title A Gantt Diagram
+</span><span>    dateFormat  YYYY-MM-DD
+</span><span>    section Section
+</span><span>    A task           :a1, 2014-01-01, 30d
+</span><span>    Another task     :after a1  , 20d
+</span><span>    section Another
+</span><span>    Task in sec      :2014-01-12  , 12d
+</span><span>    another task      : 24d
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197428957.jpg><h3 id=-4>饼图</h3><p>饼图使用 pie 表示，标题下面分别是区域名称及其百分比。<pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>pie title Pets adopted by volunteers
+</span><span>    "Dogs" : 386
+</span><span>    "Cats" : 85
+</span><span>    "Rats" : 15
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197489246.jpg><h3 id=-5>ER图</h3><pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>erDiagram
+</span><span>          CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+</span><span>          CUSTOMER ||--o{ ORDER : places
+</span><span>          CUSTOMER ||--o{ INVOICE : "liable for"
+</span><span>          DELIVERY-ADDRESS ||--o{ ORDER : receives
+</span><span>          INVOICE ||--|{ ORDER : covers
+</span><span>          ORDER ||--|{ ORDER-ITEM : includes
+</span><span>          PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+</span><span>          PRODUCT ||--o{ ORDER-ITEM : "ordered in"
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197548993.jpg><h3 id=-6>用户旅程图</h3><pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>  journey
+</span><span>    title My working day
+</span><span>    section Go to work
+</span><span>      Make tea: 5: Me
+</span><span>      Go upstairs: 3: Me
+</span><span>      Do work: 1: Me, Cat
+</span><span>    section Go home
+</span><span>      Go downstairs: 5: Me
+</span><span>      Sit down: 3: Me
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197641191.jpg><h3 id=-7>Git分支图</h3><pre class=language-markdown data-lang=markdown style=color:#c0c5ce;background-color:#2b303b><code class=language-markdown data-lang=markdown><span>```</span><span style=color:#d08770>mermaid
+</span><span>    gitGraph
+</span><span>      commit
+</span><span>      commit
+</span><span>      branch develop
+</span><span>      checkout develop
+</span><span>      commit
+</span><span>      commit
+</span><span>      checkout main
+</span><span>      merge develop
+</span><span>      commit
+</span><span>      commit
+</span><span>```
+</span></code></pre><p><img alt decoding=async loading=lazy src=/post-images/1652197715550.jpg><h2 id=-8>结束</h2><p>Mermaid支持的图目前就这么多，更深入的使用自行了解。<p>Mermaid<sup class=footnote-reference id=fr-2-1><a href=#fn-2>[2]</a></sup> 官方有一个在线的工具<sup class=footnote-reference id=fr-3-1><a href=#fn-3>[3]</a></sup>，可以导出 SVG 和 PNG。<hr><ol class=footnotes-list><li id=fn-1><p><a href=https://docs.github.com/cn/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/about-writing-and-formatting-on-github rel=noopener target=_blank>GitHub Flavored Markdown</a> <a href=#fr-1-1>↩</a></p><li id=fn-2><p><a href=https://mermaid-js.github.io/mermaid/#/ rel=noopener target=_blank>mermaid文档</a> <a href=#fr-2-1>↩</a></p><li id=fn-3><p><a href=https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNpVkE1qw0AMha8itEohvoAXhcZOsgm00Ow8XgiPnBna-WEsU4Ltu3ccE2i1kvS-9xCasAuascRbomjgWisPud6ayiQ7iKOhhaJ4nc8s4ILn-wyH3TnAYEKM1t9eNv6wQlBNlxVjEGP917JJ1cP_7nmGurlQlBDbv8r1J8xwbOyHyfH_FZM4u05NT2VPRUcJKkot7tFxcmR1PntaDQrFsGOFZW419zR-i0Lll4yOUZPwUVsJCUtJI--RRgmfd989542pLeUnuG25_ALXsls9 rel=noopener target=_blank>在线转换图片工具</a> <a href=#fr-3-1>↩</a></p></ol></div></div>
